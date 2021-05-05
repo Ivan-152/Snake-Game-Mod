@@ -1,6 +1,7 @@
 from turtle import *
 from random import randrange
 from freegames import square, vector
+import random
 
 '''
 5.1 La comida podrá moverse al azar un paso a la vez y no deberá de salirse de la ventana
@@ -11,6 +12,18 @@ from freegames import square, vector
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
+color= ['green','yellow','blue','black','magneta','cyan'] #se establece vector de colores
+ 
+snake_color= random.choice(color) # aleatorio para color de serpiente
+food_color= random.choice(color)  # aleatorio para color de comida
+food_color2=[] # backup color comida
+
+''' En esta parte se decide que si el color de la comida y de la serpiente son iguales, se cambie el color de la comida para que sean diferentes mediantes un estatuto condicional if'''
+
+if food_color == snake_color:
+    food_color_2= random.choice(color)
+else:
+    food_color_2= food_color
 
 def change(x, y):
     "Change snake direction."
@@ -43,9 +56,9 @@ def move():
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, snake_color)
 
-    square(food.x, food.y, 9, 'green')
+    square(food.x, food.y, 9, food_color2)
     update()
     ontimer(move, 100)
 
