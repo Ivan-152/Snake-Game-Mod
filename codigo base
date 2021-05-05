@@ -2,6 +2,12 @@ from turtle import *
 from random import randrange
 from freegames import square, vector
 
+'''
+5.1 La comida podrá moverse al azar un paso a la vez y no deberá de salirse de la ventana
+
+6.1 Cada vez que se corra el juego, la víbora y la comida deberán tener colores diferentes entre sí, pero al azar, de una serie de 5 diferentes colores, excepto el rojo.
+'''
+
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
