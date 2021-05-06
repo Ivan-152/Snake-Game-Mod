@@ -1,11 +1,35 @@
 from turtle import *
 from random import randrange
 from freegames import square, vector
+import random
+
+'''
+5.1 La comida podrá moverse al azar un paso a la vez y no deberá de salirse de la ventana
+
+6.1 Cada vez que se corra el juego, la víbora y la comida deberán tener colores diferentes entre sí, pero al azar, de una serie de 5 diferentes colores, excepto el rojo.
+'''
 
 food = vector(0, 0) #Para crear el vector comida
 snake = [vector(10, 0)] #Para crear el vector Snake
 mov_food = [vector(-10,0),vector(10,0),vector(0,10),vector(0,-10)] #Vector de posibles movimientos de la comida
 aim = vector(0, -10) #Para crear el vector Aim, que estara trabajando junto con el vector Snake
+
+food = vector(0, 0)
+snake = [vector(10, 0)]
+aim = vector(0, -10)
+color= ['green','yellow','blue','black','magneta','cyan'] #se establece vector de colores
+ 
+snake_color= random.choice(color) # aleatorio para color de serpiente
+food_color= random.choice(color)  # aleatorio para color de comida
+food_color2=[] # backup color comida
+
+''' En esta parte se decide que si el color de la comida y de la serpiente son iguales, se cambie el color de la comida para que sean diferentes mediantes un estatuto condicional if'''
+
+if food_color == snake_color:
+    food_color_2= random.choice(color)
+else:
+    food_color_2= food_color
+
 
 "Función change"
 def change(x, y):
@@ -66,6 +90,9 @@ def move():
 
     # Dibuja la comida
     square(food.x, food.y, 9, 'green')
+        square(body.x, body.y, 9, snake_color)
+
+    square(food.x, food.y, 9, food_color2)
     update()
     ontimer(move, 100) #Llamado de la función move, haciendo "mover" el Snake cada 100 milisegundos
 
