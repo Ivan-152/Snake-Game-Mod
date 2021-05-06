@@ -28,8 +28,6 @@ se cambie el color de la comida para que sean diferentes mediantes un estatuto c
 
 while food_color == snake_color:
     food_color= random.choice(color)
-color= ['green','yellow','blue','black','magneta','cyan'] #se establece vector de colores
- 
 snake_color= random.choice(color) # aleatorio para color de serpiente
 food_color= random.choice(color)  # aleatorio para color de comida
 food_color2=[] # backup color comida
@@ -148,6 +146,6 @@ listen()
 onkey(lambda: change(10, 0), 'Right')
 onkey(lambda: change(-10, 0), 'Left')
 onkey(lambda: change(0, 10), 'Up')
-onkey(lambda: change(0, -10), 'Down') "Son los botones a pulsar para cambiar dirección del Snake"
+onkey(lambda: change(0, -10), 'Down') #Son los botones a pulsar para cambiar dirección del Snake
 move()
 done()
