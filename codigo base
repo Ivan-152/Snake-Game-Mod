@@ -15,10 +15,6 @@ food = vector(0, 0) #Para crear el vector comida
 snake = [vector(10, 0)] #Para crear el vector Snake
 mov_food = [vector(-10,0),vector(10,0),vector(0,10),vector(0,-10)] #Vector de posibles movimientos de la comida
 aim = vector(0, -10) #Para crear el vector Aim, que estara trabajando junto con el vector Snake
-
-food = vector(0, 0)
-snake = [vector(10, 0)]
-aim = vector(0, -10)
 color= ['green','yellow','blue','black','cyan'] # vector o lista de colores 
 snake_color= random.choice(color) # escoge color aleatorio de la lista
 food_color= random.choice(color) 
@@ -28,8 +24,6 @@ se cambie el color de la comida para que sean diferentes mediantes un estatuto c
 
 while food_color == snake_color:
     food_color= random.choice(color)
-snake_color= random.choice(color) # aleatorio para color de serpiente
-food_color= random.choice(color)  # aleatorio para color de comida
 food_color2=[] # backup color comida
 
 ''' En esta parte se decide que si el color de la comida y de la serpiente son iguales, se cambie el color de la comida para que sean diferentes mediantes un estatuto condicional if'''
