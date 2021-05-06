@@ -74,16 +74,6 @@ def move():
     snake.append(head) # len=2
     
     longitud= len(snake)
-    '''   
-    if head == food and longitud == 2:
-        print('Snake:', longitud)
-        food.x = randrange(-15, 15) * 10
-        food.y = randrange(-15, 15) * 10
-             
-    else:
-        snake.pop(0)
-    '''
-
 
     #Este if es para el caso de obtener la comida"
     if head == food:
