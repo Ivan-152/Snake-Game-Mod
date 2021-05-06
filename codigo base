@@ -2,24 +2,34 @@ from turtle import *
 from random import randrange
 from freegames import square, vector
 
-food = vector(0, 0)
-snake = [vector(10, 0)]
-aim = vector(0, -10)
+food = vector(0, 0) #Para crear el vector comida
+snake = [vector(10, 0)] #Para crear el vector Snake
+mov_food = [vector(-10,0),vector(10,0),vector(0,10),vector(0,-10)] #Vector de posibles movimientos de la comida
+aim = vector(0, -10) #Para crear el vector Aim, que estara trabajando junto con el vector Snake
 
+"Función change"
 def change(x, y):
     "Change snake direction."
     aim.x = x
     aim.y = y
-
+    #Sirve para cambiar la dirección de Snake
+    
+"Función inside"
 def inside(head):
-    "Return True if head inside boundaries."
-    return -200 < head.x < 190 and -200 < head.y < 190
+    "Return True if head inside boundaries." 
+    return -200 < head.x < 190 and -200 < head.y < 190 
+    # Regresa True si la cabeza de Snake esta adentro de los limites
 
+"Función move"
 def move():
-    "Move snake forward one segment."
-    head = snake[-1].copy()
-    head.move(aim)
+    "Move snake forward one segment." # Hace que se mueva el Snake un paso adelante
+    head = snake[-1].copy() 
+    head.move(aim) # Mueve head en la dirección indicada por el usuario
+    # Mueve en vector(-10,0),vector(10,0),vector(0,10),vector(0,-10)
 
+
+    #Este if es para decir cuando es cuando perdemos:
+    #Cuando la cabeza esta en el cuerpo o si choco en los limites. Se hace roja la cabeza
     if not inside(head) or head in snake:
         square(head.x, head.y, 9, 'red')
         update()
@@ -27,29 +37,47 @@ def move():
 
     snake.append(head)
 
+
+    #Este if es para el caso de obtener la comida"
     if head == food:
         print('Snake:', len(snake))
         food.x = randrange(-15, 15) * 10
         food.y = randrange(-15, 15) * 10
     else:
         snake.pop(0)
-
+        
+        #Mover aleatoriamente la comida
+        food.move(mov_food[randrange(0,4)])
+        
+        #Validar la nueva posición este dentro de los limites
+        if not inside(food) or food in snake:
+            square(food.x, food.y, 9, 'red')
+            write("La comida esta dentro del snake o salio de la pantalla")
+            update() #Actualizar
+            return
+            
+    # Borra todo el contenido de la ventana
     clear()
 
-    for body in snake:
-        square(body.x, body.y, 9, 'black')
 
+    # Dibuja el cuerpo de la serpiente
+    for body in snake:
+        square(body.x, body.y, 9, 'black') #El color del cuerpo del Snake
+
+    # Dibuja la comida
     square(food.x, food.y, 9, 'green')
     update()
-    ontimer(move, 100)
+    ontimer(move, 100) #Llamado de la función move, haciendo "mover" el Snake cada 100 milisegundos
 
-setup(420, 420, 370, 0)
+setup(420, 420, 370, 0) #Los limites de la pantalla
 hideturtle()
 tracer(False)
+
+"Es aqui el lugar donde definimos con lambdas los botones para mover al Snake"
 listen()
 onkey(lambda: change(10, 0), 'Right')
 onkey(lambda: change(-10, 0), 'Left')
 onkey(lambda: change(0, 10), 'Up')
-onkey(lambda: change(0, -10), 'Down')
+onkey(lambda: change(0, -10), 'Down') "Son los botones a pulsar para cambiar dirección del Snake"
 move()
 done()
