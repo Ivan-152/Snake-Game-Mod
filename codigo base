@@ -17,6 +17,15 @@ aim = vector(0, -10) #Para crear el vector Aim, que estara trabajando junto con 
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
+color= ['green','yellow','blue','black','cyan'] # vector o lista de colores 
+snake_color= random.choice(color) # escoge color aleatorio de la lista
+food_color= random.choice(color) 
+
+''' En esta parte se decide que si el color de la comida y de la serpiente son iguales, 
+se cambie el color de la comida para que sean diferentes mediantes un estatuto condicional'''
+
+while food_color == snake_color:
+    food_color= random.choice(color)
 color= ['green','yellow','blue','black','magneta','cyan'] #se establece vector de colores
  
 snake_color= random.choice(color) # aleatorio para color de serpiente
@@ -29,7 +38,6 @@ if food_color == snake_color:
     food_color_2= random.choice(color)
 else:
     food_color_2= food_color
-
 
 "Función change"
 def change(x, y):
@@ -46,12 +54,14 @@ def inside(head):
 
 "Función move"
 def move():
+    global snake_color, food_color
     "Move snake forward one segment." # Hace que se mueva el Snake un paso adelante
-    head = snake[-1].copy() 
-    head.move(aim) # Mueve head en la dirección indicada por el usuario
+    write('Equipo 8')
+    head = snake[-1].copy()
+    #mueve head en la dirección indicada por el usuario
+    head.move(aim)
     # Mueve en vector(-10,0),vector(10,0),vector(0,10),vector(0,-10)
-
-
+   
     #Este if es para decir cuando es cuando perdemos:
     #Cuando la cabeza esta en el cuerpo o si choco en los limites. Se hace roja la cabeza
     if not inside(head) or head in snake:
@@ -59,16 +69,47 @@ def move():
         update()
         return
 
-    snake.append(head)
+    snake.append(head) # len=2
+    
+    longitud= len(snake)
+    '''   
+    if head == food and longitud == 2:
+        print('Snake:', longitud)
+        food.x = randrange(-15, 15) * 10
+        food.y = randrange(-15, 15) * 10
+             
+    else:
+        snake.pop(0)
+    '''
 
 
     #Este if es para el caso de obtener la comida"
     if head == food:
-        print('Snake:', len(snake))
+        print('Snake:', longitud)
         food.x = randrange(-15, 15) * 10
         food.y = randrange(-15, 15) * 10
+        ant_snake= snake_color
+        ant_food= food_color
+        snake_color= random.choice(color)
+        
+        ''' COMPARA QUE LOS COLORES NO SE REPITAN Y QUE CAMBIEN RESPECTO AL ANTERIOR ''' 
+        
+        while ant_snake == snake_color:
+            snake_color= random.choice(color)
+        food_color= random.choice(color)
+        while (food_color == snake_color) \
+            or (food_color == ant_food):
+            food_color= random.choice(color)
     else:
         snake.pop(0)
+    
+   #borra el rastro del snake
+    clear()
+    
+    # dibuja el cuerpo del snake y de la comida
+    for body in snake:
+        square(body.x, body.y, 9, snake_color)  
+    square(food.x, food.y, 9, food_color)
         
         #Mover aleatoriamente la comida
         food.move(mov_food[randrange(0,4)])
