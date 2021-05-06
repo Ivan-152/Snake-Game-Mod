@@ -112,16 +112,16 @@ def move():
     for body in snake:
         square(body.x, body.y, 9, snake_color)  
     square(food.x, food.y, 9, food_color)
-        
-        #Mover aleatoriamente la comida
-        food.move(mov_food[randrange(0,4)])
-        
-        #Validar la nueva posición este dentro de los limites
-        if not inside(food) or food in snake:
-            square(food.x, food.y, 9, 'red')
-            write("La comida esta dentro del snake o salio de la pantalla")
-            update() #Actualizar
-            return
+
+    #Mover aleatoriamente la comida
+    food.move(mov_food[randrange(0,4)])
+
+    #Validar la nueva posición este dentro de los limites
+    if not inside(food) or food in snake:
+        square(food.x, food.y, 9, 'red')
+        write("La comida esta dentro del snake o salio de la pantalla")
+        update() #Actualizar
+        return
             
     # Borra todo el contenido de la ventana
     clear()
@@ -133,9 +133,9 @@ def move():
 
     # Dibuja la comida
     square(food.x, food.y, 9, 'green')
-        square(body.x, body.y, 9, snake_color)
+    square(body.x, body.y, 9, snake_color)
 
-    square(food.x, food.y, 9, food_color2)
+    square(food.x, food.y, 9, food_color_2)
     update()
     ontimer(move, 100) #Llamado de la función move, haciendo "mover" el Snake cada 100 milisegundos
 
